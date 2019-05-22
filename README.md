@@ -11,3 +11,4 @@ Test 방법 Terminal #1 java ChatServer
 Terminal #2 java ChatClient
 
 Terminal #3 java ChatClient
+좋은코드 분석을 지속적으로
