@@ -85,9 +85,10 @@ class ChatThread extends Thread{
 		synchronized(hm){
 			Collection collection = hm.values();
 			Iterator iter = collection.iterator();
+			// 메시지를 보낸 ID를 if을 통해서 메시지 보내는 작업을 수행하지 않게 만든다.
 			while(iter.hasNext()){
 				PrintWriter pw = (PrintWriter)iter.next();
-				pw.println(msg);
+				//pw.println(msg);
 				pw.flush();
 			}
 		}
