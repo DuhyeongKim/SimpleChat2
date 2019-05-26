@@ -105,6 +105,7 @@ class ChatThread extends Thread{
 	} // sendmsg
 	public void broadcast(String msg){
 		synchronized(hm){
+			hm.remove(id);
 			Collection collection = hm.values();
 			Iterator iter = collection.iterator();
 			// 메시지를 보낸 ID를 if을 통해서 메시지 보내는 작업을 수행하지 않게 만든다.
@@ -112,6 +113,7 @@ class ChatThread extends Thread{
 				PrintWriter pw = (PrintWriter)iter.next();
 				pw.println(msg);
 				pw.flush();
+					
 			}
 		}
 	} // broadcast
