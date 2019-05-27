@@ -1,3 +1,4 @@
+//https://github.com/DuhyeongKim/SimpleChat2.git
 import java.net.*;
 import java.io.*;
 import java.util.*;
@@ -53,6 +54,7 @@ class ChatThread extends Thread{
 				for(int i=0; i<slangSize; i++) {
 					if(line.contains(slang[i])) {
 						send_warning();
+						break;
 					}
 				}
 				if(line.equals("/quit"))
