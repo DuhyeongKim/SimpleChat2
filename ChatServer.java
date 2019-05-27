@@ -50,13 +50,15 @@ class ChatThread extends Thread{
 			String line = null;
 			// 금지어 목록을 포함시킨다. if문을 이용해서 금지어 목록을 만들고 사용자에게 경고의 메시지를 보낸다.
 			while((line = br.readLine()) != null){
+				int s = 0;
 				int slangSize = slang.length;
 				for(int i=0; i<slangSize; i++) {
 					if(line.contains(slang[i])) {
 						send_warning();
+						s++;
+						
 
 					}
-					break;
 				}
 				if(line.equals("/quit"))
 					break;
@@ -65,8 +67,9 @@ class ChatThread extends Thread{
 					send_userlist();
 				if(line.indexOf("/to ") == 0){
 					sendmsg(line);
-				}else
+				}if(s==0) {
 					broadcast(id + " : " + line);
+			}
 			}
 		}catch(Exception ex){
 			System.out.println(ex);
