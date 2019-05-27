@@ -26,6 +26,7 @@ class ChatThread extends Thread{
 	private String id;
 	private BufferedReader br;
 	private HashMap hm;
+	//금지어 문자열 배열 생성
 	private String slang[] = {"wow", "as", "fufu", "je", "su"};
 	private boolean initFlag = false;
 	public ChatThread(Socket sock, HashMap hm){
@@ -84,6 +85,8 @@ class ChatThread extends Thread{
 			}catch(Exception ex){}
 		}
 	} // run
+	//set key를 이용해서 금지어를 쓴 해당 id에만 경고의 메시지를 보낸다.
+	//printWriter를 이용해서 메시지를 보낸다.
 	public void send_warning(){
 		synchronized(hm){
 			Set<String> keys = hm.keySet();
@@ -97,6 +100,8 @@ class ChatThread extends Thread{
 			//System.out.println("user id :" +  key;
 		}
 		}
+	//set key를 이용해서 id정보를 모두 저장한다, iterator를 이용하여 key를 하나씩 저장한다.
+	//pw를 이용해서 userlist를 보내고 while문이 종료되면 size()메소드를 이용해 키의 총 개수를 출력한다.
 	public void send_userlist(){
 		synchronized(hm){
 			Set<String> keys = hm.keySet();
@@ -129,6 +134,8 @@ class ChatThread extends Thread{
 			} // if
 		}
 	} // sendmsg
+	//id를 printwirter로 생성시켜주고 기존의 pw값들이 저장되어 있는 iterator와 if문을 이용해서 비교하여
+	//자신의 id가 나오면 continue를 통해 자신의 chat에 출력되지 않게 한다. 
 	public void broadcast(String msg){
 		synchronized(hm){
 			PrintWriter myId = (PrintWriter)hm.get(id);
