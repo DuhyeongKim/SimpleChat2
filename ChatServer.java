@@ -54,8 +54,9 @@ class ChatThread extends Thread{
 				for(int i=0; i<slangSize; i++) {
 					if(line.contains(slang[i])) {
 						send_warning();
-						break;
+
 					}
+					break;
 				}
 				if(line.equals("/quit"))
 					break;
