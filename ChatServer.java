@@ -25,6 +25,7 @@ class ChatThread extends Thread{
 	private String id;
 	private BufferedReader br;
 	private HashMap hm;
+	private String slang[] = {"wow", "as", "fufu", "je", "su"};
 	private boolean initFlag = false;
 	public ChatThread(Socket sock, HashMap hm){
 		this.sock = sock;
@@ -48,6 +49,12 @@ class ChatThread extends Thread{
 			String line = null;
 			// 금지어 목록을 포함시킨다. if문을 이용해서 금지어 목록을 만들고 사용자에게 경고의 메시지를 보낸다.
 			while((line = br.readLine()) != null){
+				int slangSize = slang.length;
+				for(int i=0; i<slangSize; i++) {
+					if(line.contains(slang[i])) {
+						send_warning();
+					}
+				}
 				if(line.equals("/quit"))
 					break;
 				//"userlist"를 입력하면 현재 접속한 사용자들의 id와 총 사용자 수를 보여준다.
@@ -71,6 +78,19 @@ class ChatThread extends Thread{
 			}catch(Exception ex){}
 		}
 	} // run
+	public void send_warning(){
+		synchronized(hm){
+			Set<String> keys = hm.keySet();
+			Iterator<String> it = keys.iterator();
+			Object obj = hm.get(id);
+			PrintWriter pw = (PrintWriter)obj;
+			pw.println("Don't use that words");
+			pw.flush();
+			
+			//System.out.println("<user id list>");
+			//System.out.println("user id :" +  key;
+		}
+		}
 	public void send_userlist(){
 		synchronized(hm){
 			Set<String> keys = hm.keySet();
@@ -105,15 +125,18 @@ class ChatThread extends Thread{
 	} // sendmsg
 	public void broadcast(String msg){
 		synchronized(hm){
-			hm.remove(id);
+			PrintWriter myId = (PrintWriter)hm.get(id);
+			Set<String> keys = hm.keySet();
+			Iterator<String> it = keys.iterator();
 			Collection collection = hm.values();
 			Iterator iter = collection.iterator();
 			// 메시지를 보낸 ID를 if을 통해서 메시지 보내는 작업을 수행하지 않게 만든다.
 			while(iter.hasNext()){
 				PrintWriter pw = (PrintWriter)iter.next();
+				if(pw.equals(myId)) continue;
 				pw.println(msg);
 				pw.flush();
-					
+
 			}
 		}
 	} // broadcast
