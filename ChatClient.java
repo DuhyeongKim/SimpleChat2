@@ -1,4 +1,5 @@
 import java.net.*;
+//socket통신을 이용한 자바 프로그램
 import java.io.*;
 
 public class ChatClient {
