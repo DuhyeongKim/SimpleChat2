@@ -40,6 +40,6 @@ Simple Chat Upgrade!!
   Iterator
   
   broadcast(String msg)
-  sendmsg(String msg)
+  
   
   
