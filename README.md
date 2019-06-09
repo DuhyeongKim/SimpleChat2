@@ -11,9 +11,6 @@ Test 방법 Terminal #1 java ChatServer
 Terminal #2 java ChatClient
 
 Terminal #3 java ChatClient
-좋은코드 분석을 지속적으로
-
-
 
 Simple Chat Upgrade!!
 1.현재 접속한 사용자 목록 보기 기능
